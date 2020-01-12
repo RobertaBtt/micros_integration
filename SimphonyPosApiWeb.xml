@@ -1,0 +1,1435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://micros-hosting.com/EGateway/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://micros-hosting.com/EGateway/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://micros-hosting.com/EGateway/">
+      <s:element name="CalculateTransactionTotals">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItems" type="tns:ArrayOfSimphonyPosApi_MenuItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMeals" type="tns:ArrayOfSimphonyPosApi_ComboMeal" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSvcCharge" type="tns:SimphonyPosApi_SvcCharge" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubtotalDiscount" type="tns:SimphonyPosApi_Discount" />
+            <s:element minOccurs="1" maxOccurs="1" name="revenueCenter" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="orderType" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="employeeNumber" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponse" type="tns:SimphonyPosApi_TotalsResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSimphonyPosApi_MenuItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_MenuItem" nillable="true" type="tns:SimphonyPosApi_MenuItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_MenuItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Condiments" type="tns:ArrayOfSimphonyPosApi_MenuItemDefinition" />
+          <s:element minOccurs="0" maxOccurs="1" name="MenuItem" type="tns:SimphonyPosApi_MenuItemDefinition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimphonyPosApi_MenuItemDefinition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_MenuItemDefinition" nillable="true" type="tns:SimphonyPosApi_MenuItemDefinition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_MenuItemDefinition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemDiscount" type="tns:SimphonyPosApi_Discount" />
+          <s:element minOccurs="1" maxOccurs="1" name="MiObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MiOverridePrice" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MiReference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MiWeight" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MiMenuLevel" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MiSubLevel" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MiPriveLevel" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_Discount">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DiscAmountOrPercent" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DiscObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DiscReference" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimphonyPosApi_ComboMeal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_ComboMeal" nillable="true" type="tns:SimphonyPosApi_ComboMeal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_ComboMeal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ComboMealMainItem" type="tns:SimphonyPosApi_MenuItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="ComboMealMenuItem" type="tns:SimphonyPosApi_MenuItem" />
+          <s:element minOccurs="1" maxOccurs="1" name="ComboMealObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SideItems" type="tns:ArrayOfSimphonyPosApi_MenuItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_SvcCharge">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SvcChgAmountOrPercent" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SvcChgObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SvcChgReference" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_TotalsResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OperationalResult" type="tns:SimphonyPosApi_OperationalResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalsAutoSvcChgTotals" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalsOtherTotals" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalsSubTotal" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalsTaxTotals" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TotalsTotalDue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_OperationalResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorCode" type="tns:TransactionServices_ErrorCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TransactionServices_ErrorCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="AmountNotEntered" />
+          <s:enumeration value="AppInitInProgress" />
+          <s:enumeration value="CCAuthDeclined" />
+          <s:enumeration value="CCAuthDeclinedWithMessage" />
+          <s:enumeration value="CCServerDown" />
+          <s:enumeration value="CheckEmployeeNumberMismatch" />
+          <s:enumeration value="CheckNotFound" />
+          <s:enumeration value="CheckListNotFound" />
+          <s:enumeration value="CheckOpenedOnSystem" />
+          <s:enumeration value="CheckTableNumberMismatch" />
+          <s:enumeration value="ComboMealNotFound" />
+          <s:enumeration value="ConnectionDown" />
+          <s:enumeration value="DataOutOfRange" />
+          <s:enumeration value="DetailDoesNotSupportTriggeredEvents" />
+          <s:enumeration value="DiscountNotFound" />
+          <s:enumeration value="DiscountAmountRequired" />
+          <s:enumeration value="DiscountAmountTooLarge" />
+          <s:enumeration value="DiscountAmountZero" />
+          <s:enumeration value="DiscountItemNotAllowed" />
+          <s:enumeration value="DiscountNotAllowedFilterActive" />
+          <s:enumeration value="DiscountOnParentCombo" />
+          <s:enumeration value="DuplicateLineNumber" />
+          <s:enumeration value="EGatewayClientStartError" />
+          <s:enumeration value="EGatewayClientStopError" />
+          <s:enumeration value="EGatewayConnectionError" />
+          <s:enumeration value="EGatewayConnectionNotInPool" />
+          <s:enumeration value="EGatewayWaitConnectionTimeout" />
+          <s:enumeration value="EmployeeClockIOStatusMismatch" />
+          <s:enumeration value="EmployeeIDMismatch" />
+          <s:enumeration value="EmployeeNotFound" />
+          <s:enumeration value="EmployeeRVCMismatch" />
+          <s:enumeration value="ErrorCreatingGuestcheck" />
+          <s:enumeration value="ErrorInvalidWorkstation" />
+          <s:enumeration value="ErrorReadingCheck" />
+          <s:enumeration value="ErrorPickupCheck" />
+          <s:enumeration value="FailedDataStoreInitialization" />
+          <s:enumeration value="FailedDbSettingLoad" />
+          <s:enumeration value="FailedErrorTranslationInitial" />
+          <s:enumeration value="FailedPostCARequest" />
+          <s:enumeration value="FailedInitialization" />
+          <s:enumeration value="FailedLoggerInitialization" />
+          <s:enumeration value="FailedSecurityAPIInitialization" />
+          <s:enumeration value="FailedSubmitPrintJob" />
+          <s:enumeration value="InternalCommunicationError" />
+          <s:enumeration value="InternalProcessingError" />
+          <s:enumeration value="InvalidArguments" />
+          <s:enumeration value="InvaildAuthCode" />
+          <s:enumeration value="InvalidCheckNumber" />
+          <s:enumeration value="InvalidCreditCardExpirationDate" />
+          <s:enumeration value="InvalidCreditCardHost" />
+          <s:enumeration value="InvalidCreditCardNumber" />
+          <s:enumeration value="InvalidClientName" />
+          <s:enumeration value="InvalidClosedDays" />
+          <s:enumeration value="InvalidConfigInfoRequestType" />
+          <s:enumeration value="InvalidConfigInfoType" />
+          <s:enumeration value="InvalidCustomerInfo" />
+          <s:enumeration value="InvalidDetailLine" />
+          <s:enumeration value="InvalidDetailLineType" />
+          <s:enumeration value="InvalidEmployeeNumber" />
+          <s:enumeration value="InvalidGuestCount" />
+          <s:enumeration value="InvalidLineNumber" />
+          <s:enumeration value="InvalidMenuItemPrice" />
+          <s:enumeration value="InvalidOrderTypeNumber" />
+          <s:enumeration value="InvalidPropertyNum" />
+          <s:enumeration value="InvalidRvcNum" />
+          <s:enumeration value="InvalidServingPeriod" />
+          <s:enumeration value="InvalidTableNumber" />
+          <s:enumeration value="InvalidTranslationSpecifier" />
+          <s:enumeration value="ItemDiscountNeedsParentItem" />
+          <s:enumeration value="LicensingFailed" />
+          <s:enumeration value="MenuItemOutOfOrder" />
+          <s:enumeration value="MissingDetailLinesElement" />
+          <s:enumeration value="MissingTransactionElement" />
+          <s:enumeration value="MissingTransactionHeaderElement" />
+          <s:enumeration value="NoRequestHeader" />
+          <s:enumeration value="NoSalesForDiscount" />
+          <s:enumeration value="NotImplemented" />
+          <s:enumeration value="NoSalesToApplyServiceCharge" />
+          <s:enumeration value="NullInput" />
+          <s:enumeration value="PaidPartially" />
+          <s:enumeration value="PaymentAborted" />
+          <s:enumeration value="PriceMenuItemWithZeroAmount" />
+          <s:enumeration value="SecurityInitFailed" />
+          <s:enumeration value="ServiceChargeTaxClassNotFound" />
+          <s:enumeration value="Success" />
+          <s:enumeration value="TenderTypeNotFound" />
+          <s:enumeration value="TransactionEmployeeNotFound" />
+          <s:enumeration value="TranslationFileNotAvailable" />
+          <s:enumeration value="UnhandledException" />
+          <s:enumeration value="UnknownCreditCardType" />
+          <s:enumeration value="UnknownExceptionCode" />
+          <s:enumeration value="TransactionLocked" />
+          <s:enumeration value="WorkstationNotification" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="CalculateTransactionTotalsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItems" type="tns:ArrayOfSimphonyPosApi_MenuItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMeals" type="tns:ArrayOfSimphonyPosApi_ComboMeal" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSvcCharge" type="tns:SimphonyPosApi_SvcCharge" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubtotalDiscount" type="tns:SimphonyPosApi_Discount" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponse" type="tns:SimphonyPosApi_TotalsResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigurationInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="employeeObjectNum" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="configurationInfoType" type="tns:ArrayOfInt" />
+            <s:element minOccurs="1" maxOccurs="1" name="revenueCenter" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="configInfoResponse" type="tns:SimphonyPosApi_ConfigInfoResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_ConfigInfoResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OperationalResult" type="tns:SimphonyPosApi_OperationalResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConfigInfoType" type="tns:ArrayOfEConfigurationInfoType" />
+          <s:element minOccurs="0" maxOccurs="1" name="LanguageInformation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServingPeriod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceCharge" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MenuLevel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TenderMedia" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tables" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RevenueCenters" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RevenueCenterParameter" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MajorGroup" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MenuItemClass" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MenuItemPrice" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Employees" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Discounts" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MenuItemDefinitions" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FamilyGroups" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Interfaces" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MenuItemMasters" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MenuItemSlu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MainMenuLevel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SubMenuLevel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventTypes" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventSubTypes" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventDefinitions" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tax" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEConfigurationInfoType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EConfigurationInfoType" type="tns:EConfigurationInfoType" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EConfigurationInfoType">
+        <s:restriction base="s:string">
+          <s:enumeration value="UNDEFINED" />
+          <s:enumeration value="MENUITEMDEFINITIONS" />
+          <s:enumeration value="MENUITEMPRICE" />
+          <s:enumeration value="MENUITEMCLASS" />
+          <s:enumeration value="SERVICECHARGE" />
+          <s:enumeration value="DISCOUNTDEFINITIONS" />
+          <s:enumeration value="TENDERMEDIA" />
+          <s:enumeration value="ORDERTYPE" />
+          <s:enumeration value="FAMILYGROUP" />
+          <s:enumeration value="MAJORGROUP" />
+          <s:enumeration value="REVENUECENTERPARAMETER" />
+          <s:enumeration value="REVENUECENTERS" />
+          <s:enumeration value="INTERFACES" />
+          <s:enumeration value="MENUITEMMASTERS" />
+          <s:enumeration value="SERVINGPERIODS" />
+          <s:enumeration value="CURRENCY" />
+          <s:enumeration value="VERSION" />
+          <s:enumeration value="EMPLOYEES" />
+          <s:enumeration value="TABLES" />
+          <s:enumeration value="LANGUAGEINFORMATION" />
+          <s:enumeration value="MENULEVEL" />
+          <s:enumeration value="MENUITEMSLU" />
+          <s:enumeration value="MAINMENULEVEL" />
+          <s:enumeration value="SUBMENULEVEL" />
+          <s:enumeration value="EVENTTYPES" />
+          <s:enumeration value="EVENTSUBTYPES" />
+          <s:enumeration value="EVENTDEFINITIONS" />
+          <s:enumeration value="TAX" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetConfigurationInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="configInfoResponse" type="tns:SimphonyPosApi_ConfigInfoResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetConfigurationInfoEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="configInfoRequest" type="tns:SimphonyPosApi_ConfigInfoRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="configInfoResponse" type="tns:SimphonyPosApi_ConfigInfoResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SimphonyPosApi_ConfigInfoRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VendorCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EmployeeObjectNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RVCObjectNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConfigurationInfo" type="tns:ArrayOfSimphonyPosApi_ConfigInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimphonyPosApi_ConfigInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_ConfigInfo" nillable="true" type="tns:SimphonyPosApi_ConfigInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_ConfigInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ConfigurationInfoTypeID" type="tns:EConfigurationInfoType" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartIndex" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxRecordCount" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetConfigurationInfoExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="configInfoResponse" type="tns:SimphonyPosApi_ConfigInfoResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostTransactionEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pGuestCheck" type="tns:SimphonyPosApi_GuestCheck" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItems" type="tns:ArrayOfSimphonyPosApi_MenuItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMeals" type="tns:ArrayOfSimphonyPosApi_ComboMeal" />
+            <s:element minOccurs="0" maxOccurs="1" name="pServiceChg" type="tns:SimphonyPosApi_SvcCharge" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubTotalDiscount" type="tns:SimphonyPosApi_Discount" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTmedDetail" type="tns:SimphonyPosApi_TmedDetailItemEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponse" type="tns:SimphonyPosApi_TotalsResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckPrintLines" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppVoucherOutput" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SimphonyPosApi_GuestCheck">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OperationalResult" type="tns:SimphonyPosApi_OperationalResult" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckDateToFire" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckEmployeeObjectNum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckGuestCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CheckID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckNum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckOrderType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckRevenueCenterID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckSeq" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckStatusBits" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckTableObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PCheckInfoLines" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="PPrintJobIds" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="EventObjectNum" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_TmedDetailItemEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TmedEPayment" type="tns:SimphonyPosApi_EPayment" />
+          <s:element minOccurs="1" maxOccurs="1" name="TmedObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TmedPartialPayment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TmedReference" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_EPayment">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AccountDataSource" type="tns:EAccountDataSource" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountType" type="tns:EAccountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcctNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressVerification" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AuthorizationCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BaseAmount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CashBackAmount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CVVNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeviceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpirationDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="InterfaceName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IssueNumber" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="KeySerialNum" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PaymentCommand" type="tns:EPaymentDirective" />
+          <s:element minOccurs="0" maxOccurs="1" name="PinBlock" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="SvcAccountType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SvcResponse" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipAmount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Track1Data" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Track2Data" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Track3Data" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="EAccountDataSource">
+        <s:restriction base="s:string">
+          <s:enumeration value="SOURCE_UNDEFINED" />
+          <s:enumeration value="MAGNETIC_STRIPE" />
+          <s:enumeration value="RFID_TRACK_DATA_RULES" />
+          <s:enumeration value="RFID_M_CHIP_RULES" />
+          <s:enumeration value="MANUALLY_KEYED_TRACK_1_CAPABLE" />
+          <s:enumeration value="MANUALLY_KEYED_TRACK_2_CAPABLE" />
+          <s:enumeration value="MANUALLY_KEYED_NO_CARD_READER" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="EAccountType">
+        <s:restriction base="s:string">
+          <s:enumeration value="ACCOUNT_TYPE_UNDEFINED" />
+          <s:enumeration value="CHECKING" />
+          <s:enumeration value="SAVINGS" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="EPaymentDirective">
+        <s:restriction base="s:string">
+          <s:enumeration value="NO_E_PAYMENT" />
+          <s:enumeration value="CREDIT_AUTHORIZE_ONLY" />
+          <s:enumeration value="CREDIT_AUTHORIZE_AND_PAY" />
+          <s:enumeration value="DEBIT_AUTHORIZE_ONLY" />
+          <s:enumeration value="DEBIT_AUTHORIZE_AND_PAY" />
+          <s:enumeration value="STORED_VALUE_CARD_AUTHORIZE" />
+          <s:enumeration value="STORED_VALUE_CARD_REDEEM" />
+          <s:enumeration value="GET_DEBIT_CANCEL_VOUCHER" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="PostTransactionExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pGuestCheck" type="tns:SimphonyPosApi_GuestCheck" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItems" type="tns:ArrayOfSimphonyPosApi_MenuItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMeals" type="tns:ArrayOfSimphonyPosApi_ComboMeal" />
+            <s:element minOccurs="0" maxOccurs="1" name="pServiceChg" type="tns:SimphonyPosApi_SvcCharge" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubTotalDiscount" type="tns:SimphonyPosApi_Discount" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTmedDetail" type="tns:SimphonyPosApi_TmedDetailItemEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponse" type="tns:SimphonyPosApi_TotalsResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckPrintLines" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppVoucherOutput" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddToExistingCheckEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pGuestCheck" type="tns:SimphonyPosApi_GuestCheck" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItems" type="tns:ArrayOfSimphonyPosApi_MenuItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMeals" type="tns:ArrayOfSimphonyPosApi_ComboMeal" />
+            <s:element minOccurs="0" maxOccurs="1" name="pServiceChg" type="tns:SimphonyPosApi_SvcCharge" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubTotalDiscount" type="tns:SimphonyPosApi_Discount" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTmedDetail" type="tns:SimphonyPosApi_TmedDetailItemEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponse" type="tns:SimphonyPosApi_TotalsResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckPrintLines" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppVoucherOutput" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddToExistingCheckExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pGuestCheck" type="tns:SimphonyPosApi_GuestCheck" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItems" type="tns:ArrayOfSimphonyPosApi_MenuItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMeals" type="tns:ArrayOfSimphonyPosApi_ComboMeal" />
+            <s:element minOccurs="0" maxOccurs="1" name="pServiceChg" type="tns:SimphonyPosApi_SvcCharge" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubTotalDiscount" type="tns:SimphonyPosApi_Discount" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTmedDetail" type="tns:SimphonyPosApi_TmedDetailItemEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponse" type="tns:SimphonyPosApi_TotalsResponse" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckPrintLines" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppVoucherOutput" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoidTransaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pGuestCheck" type="tns:SimphonyPosApi_GuestCheck" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VoidTransactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pGuestCheck" type="tns:SimphonyPosApi_GuestCheck" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckPrintJobStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ppJobId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppJobStatus" type="tns:SimphonyPrintApi_PrintJobStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SimphonyPrintApi_PrintJobStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:SimphonyPrintApi_Status" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrintJobList" type="tns:ArrayOfInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="OperationalResult" type="tns:SimphonyPosApi_OperationalResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusMsg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SystemStatusMsg" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SimphonyPrintApi_Status">
+        <s:restriction base="s:string">
+          <s:enumeration value="JobPending" />
+          <s:enumeration value="JobComplete" />
+          <s:enumeration value="JobAborted" />
+          <s:enumeration value="JobSentToBackup" />
+          <s:enumeration value="JobFailed" />
+          <s:enumeration value="JobNotFound" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="CheckPrintJobStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ppJobStatus" type="tns:SimphonyPrintApi_PrintJobStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrintedCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CheckSeq" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EmplObjectnum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TmedObjectNum" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckPrintLines" type="tns:SimphonyPosApi_CheckPrintResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SimphonyPosApi_CheckPrintResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OperationalResult" type="tns:SimphonyPosApi_OperationalResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="CheckPrintLines" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPrintedCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckPrintLines" type="tns:SimphonyPosApi_CheckPrintResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOpenChecks">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="employeeObjectNum" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="openChecks" type="tns:SimphonyPosApi_OpenChecks" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SimphonyPosApi_OpenChecks">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OperationalResult" type="tns:SimphonyPosApi_OperationalResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="CheckSummary" type="tns:ArrayOfSimphonyPosApi_CheckSummary" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimphonyPosApi_CheckSummary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_CheckSummary" nillable="true" type="tns:SimphonyPosApi_CheckSummary" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_CheckSummary">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CheckAutoFireTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckCurrentlyOpenOnWorkstation" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckEmployeeObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CheckID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckInsufficientBeverage" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckInTraining" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckIsDelayedOrder" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckIsFutureOrder" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckLastServiceTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckLastWorkstationOwner" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckNum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckOpenTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckOrderType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckRevenueCenterObjectNum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckSeq" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckTableGroup" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckTableObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CheckTotalDue" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckTransferedToDriver" type="s:short" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOpenChecksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="openChecks" type="tns:SimphonyPosApi_OpenChecks" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOpenChecksEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="employeeObjectNum" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="openChecks" type="tns:SimphonyPosApi_OpenChecks" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOpenChecksExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="openChecks" type="tns:SimphonyPosApi_OpenChecks" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOpenChecksByRVC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="vendorCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="employeeObjectNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="revenueCenterObjectNum" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="openChecks" type="tns:SimphonyPosApi_OpenChecks" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOpenChecksByRVCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="openChecks" type="tns:SimphonyPosApi_OpenChecks" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetChecks">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckFilter" type="tns:SimphonyPosApi_CheckRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppChecksResponse" type="tns:SimphonyPosApi_CheckResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SimphonyPosApi_CheckRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VendorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CheckNumbers" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="EmployeeObjectNum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RvcObjectNum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderTypeID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="KdsOrderStatus" type="tns:ArrayOfInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="LookUpStartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="IncludeClosedCheck" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_CheckResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OperationalResult" type="tns:SimphonyPosApi_OperationalResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="Checks" type="tns:ArrayOfSimphonyPosApi_CheckSummaryEx" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimphonyPosApi_CheckSummaryEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_CheckSummaryEx" nillable="true" type="tns:SimphonyPosApi_CheckSummaryEx" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_CheckSummaryEx">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SimphonyPosApi_CheckSummary">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="LastKnownKdsOrderStatus" type="tns:SimphonyPosApi_KdsOrderStatus" />
+              <s:element minOccurs="0" maxOccurs="1" name="KdsOrderStatusHistory" type="tns:ArrayOfSimphonyPosApi_KdsOrderStatus" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_KdsOrderStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ChangedTime" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimphonyPosApi_KdsOrderStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_KdsOrderStatus" nillable="true" type="tns:SimphonyPosApi_KdsOrderStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetChecksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ppChecksResponse" type="tns:SimphonyPosApi_CheckResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCheckDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckDetailFilter" type="tns:SimphonyPosApi_CheckDetailRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckDetailResponse" type="tns:SimphonyPosApi_CheckDetailResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SimphonyPosApi_CheckDetailRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VendorCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckSeqNumber" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_CheckDetailResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OperationalResult" type="tns:SimphonyPosApi_OperationalResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="CheckDetail" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCheckDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckDetailResponse" type="tns:SimphonyPosApi_CheckDetailResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CalculateTransactionTotalsEx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItemsEx" type="tns:ArrayOfSimphonyPosApi_MenuItemEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMealsEx" type="tns:ArrayOfSimphonyPosApi_ComboMealEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSvcChargeEx" type="tns:SimphonyPosApi_SvcChargeEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubTotalDiscountEx" type="tns:ArrayOfSimphonyPosApi_DiscountEx" />
+            <s:element minOccurs="1" maxOccurs="1" name="revenueCenterObjectNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="orderType" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="employeeObjectNum" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="checkGuestcount" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponseEx" type="tns:SimphonyPosApi_TotalsResponseEx" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSimphonyPosApi_MenuItemEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_MenuItemEx" nillable="true" type="tns:SimphonyPosApi_MenuItemEx" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_MenuItemEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Extensibility" type="tns:ArrayOfSimphonyPosApi_Extensibility" />
+          <s:element minOccurs="0" maxOccurs="1" name="Condiments" type="tns:ArrayOfSimphonyPosApi_MenuItemDefinitionEx" />
+          <s:element minOccurs="0" maxOccurs="1" name="MenuItem" type="tns:SimphonyPosApi_MenuItemDefinitionEx" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimphonyPosApi_Extensibility">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_Extensibility" nillable="true" type="tns:SimphonyPosApi_Extensibility" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_Extensibility">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensibilityAppName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensibilityDataName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExtensibilityDataType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrintOptionBits" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StringData" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimphonyPosApi_MenuItemDefinitionEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_MenuItemDefinitionEx" nillable="true" type="tns:SimphonyPosApi_MenuItemDefinitionEx" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_MenuItemDefinitionEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemDiscount" type="tns:ArrayOfSimphonyPosApi_DiscountEx" />
+          <s:element minOccurs="1" maxOccurs="1" name="MiObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MiOverridePrice" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MiQuantity" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="MiReference" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MiWeight" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MiMenuLevel" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MiSubLevel" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MiPriceLevel" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MiDefinitionSeqNum" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimphonyPosApi_DiscountEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_DiscountEx" nillable="true" type="tns:SimphonyPosApi_DiscountEx" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_DiscountEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Extensibility" type="tns:SimphonyPosApi_Extensibility" />
+          <s:element minOccurs="0" maxOccurs="1" name="DiscAmountOrPercent" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DiscObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DiscReference" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimphonyPosApi_ComboMealEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_ComboMealEx" nillable="true" type="tns:SimphonyPosApi_ComboMealEx" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_ComboMealEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Extensibility" type="tns:SimphonyPosApi_Extensibility" />
+          <s:element minOccurs="0" maxOccurs="1" name="ComboMealMainItem" type="tns:SimphonyPosApi_MenuItemEx" />
+          <s:element minOccurs="0" maxOccurs="1" name="ComboMealMenuItem" type="tns:SimphonyPosApi_MenuItemEx" />
+          <s:element minOccurs="1" maxOccurs="1" name="ComboMealObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SideItems" type="tns:ArrayOfSimphonyPosApi_MenuItemEx" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_SvcChargeEx">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Extensibility" type="tns:SimphonyPosApi_Extensibility" />
+          <s:element minOccurs="0" maxOccurs="1" name="SvcChgAmountOrPercent" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SvcChgObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SvcChgReference" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_TotalsResponseEx">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SimphonyPosApi_TotalsResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CheckTaxDataPerRate" type="tns:ArrayOfCheckTaxDataPerRate" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfCheckTaxDataPerRate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CheckTaxDataPerRate" nillable="true" type="tns:CheckTaxDataPerRate" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CheckTaxDataPerRate">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Index" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tax" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Exempt" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AnyApplied" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CalculateTransactionTotalsExResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItemsEx" type="tns:ArrayOfSimphonyPosApi_MenuItemEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMealsEx" type="tns:ArrayOfSimphonyPosApi_ComboMealEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSvcChargeEx" type="tns:SimphonyPosApi_SvcChargeEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubTotalDiscountEx" type="tns:ArrayOfSimphonyPosApi_DiscountEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponseEx" type="tns:SimphonyPosApi_TotalsResponseEx" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostTransactionEx2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pGuestCheck" type="tns:SimphonyPosApi_GuestCheck" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItemsEx" type="tns:ArrayOfSimphonyPosApi_MenuItemEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMealsEx" type="tns:ArrayOfSimphonyPosApi_ComboMealEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSvcChargeEx" type="tns:SimphonyPosApi_SvcChargeEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubTotalDiscountEx" type="tns:ArrayOfSimphonyPosApi_DiscountEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTmedDetailEx2" type="tns:ArrayOfSimphonyPosApi_TmedDetailItemEx2" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponseEx" type="tns:SimphonyPosApi_TotalsResponseEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckPrintLines" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppVoucherOutput" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="checkExtensibilityDetails" type="tns:ArrayOfSimphonyPosApi_Extensibility" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSimphonyPosApi_TmedDetailItemEx2">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SimphonyPosApi_TmedDetailItemEx2" nillable="true" type="tns:SimphonyPosApi_TmedDetailItemEx2" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_TmedDetailItemEx2">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Extensibility" type="tns:SimphonyPosApi_Extensibility" />
+          <s:element minOccurs="0" maxOccurs="1" name="TmedEPayment" type="tns:SimphonyPosApi_EPaymentEx" />
+          <s:element minOccurs="1" maxOccurs="1" name="TmedObjectNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TmedPartialPayment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TmedReference" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SimphonyPosApi_EPaymentEx">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AccountDataSource" type="tns:EAccountDataSource" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountType" type="tns:EAccountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcctNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressVerification" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AuthorizationCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BaseAmount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CashBackAmount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CVVNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeviceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpirationDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="InterfaceName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IssueNumber" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="KeySerialNum" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PaymentCommand" type="tns:EPaymentDirective" />
+          <s:element minOccurs="0" maxOccurs="1" name="PinBlock" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="SvcAccountType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SvcResponse" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TipAmount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Track1Data" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Track2Data" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Track3Data" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PaymentCommandString" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PostTransactionEx2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pGuestCheck" type="tns:SimphonyPosApi_GuestCheck" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItemsEx" type="tns:ArrayOfSimphonyPosApi_MenuItemEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMealsEx" type="tns:ArrayOfSimphonyPosApi_ComboMealEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSvcChargeEx" type="tns:SimphonyPosApi_SvcChargeEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubTotalDiscountEx" type="tns:ArrayOfSimphonyPosApi_DiscountEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTmedDetailEx2" type="tns:ArrayOfSimphonyPosApi_TmedDetailItemEx2" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponseEx" type="tns:SimphonyPosApi_TotalsResponseEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckPrintLines" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppVoucherOutput" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddToExistingCheckEx2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pGuestCheck" type="tns:SimphonyPosApi_GuestCheck" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItemsEx" type="tns:ArrayOfSimphonyPosApi_MenuItemEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMealsEx" type="tns:ArrayOfSimphonyPosApi_ComboMealEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSvcChargeEx" type="tns:SimphonyPosApi_SvcChargeEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubTotalDiscountEx" type="tns:ArrayOfSimphonyPosApi_DiscountEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTmedDetailEx3" type="tns:SimphonyPosApi_TmedDetailItemEx2" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponseEx" type="tns:SimphonyPosApi_TotalsResponseEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckPrintLines" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppVoucherOutput" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="checkExtensibilityDetails" type="tns:ArrayOfSimphonyPosApi_Extensibility" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddToExistingCheckEx2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="pGuestCheck" type="tns:SimphonyPosApi_GuestCheck" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppMenuItemsEx" type="tns:ArrayOfSimphonyPosApi_MenuItemEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppComboMealsEx" type="tns:ArrayOfSimphonyPosApi_ComboMealEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSvcChargeEx" type="tns:SimphonyPosApi_SvcChargeEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pSubTotalDiscountEx" type="tns:ArrayOfSimphonyPosApi_DiscountEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTmedDetailEx3" type="tns:SimphonyPosApi_TmedDetailItemEx2" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTotalsResponseEx" type="tns:SimphonyPosApi_TotalsResponseEx" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppCheckPrintLines" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="ppVoucherOutput" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CalculateTransactionTotalsSoapIn">
+    <wsdl:part name="parameters" element="tns:CalculateTransactionTotals" />
+  </wsdl:message>
+  <wsdl:message name="CalculateTransactionTotalsSoapOut">
+    <wsdl:part name="parameters" element="tns:CalculateTransactionTotalsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigurationInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConfigurationInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigurationInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConfigurationInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigurationInfoExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetConfigurationInfoEx" />
+  </wsdl:message>
+  <wsdl:message name="GetConfigurationInfoExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetConfigurationInfoExResponse" />
+  </wsdl:message>
+  <wsdl:message name="PostTransactionExSoapIn">
+    <wsdl:part name="parameters" element="tns:PostTransactionEx" />
+  </wsdl:message>
+  <wsdl:message name="PostTransactionExSoapOut">
+    <wsdl:part name="parameters" element="tns:PostTransactionExResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddToExistingCheckExSoapIn">
+    <wsdl:part name="parameters" element="tns:AddToExistingCheckEx" />
+  </wsdl:message>
+  <wsdl:message name="AddToExistingCheckExSoapOut">
+    <wsdl:part name="parameters" element="tns:AddToExistingCheckExResponse" />
+  </wsdl:message>
+  <wsdl:message name="VoidTransactionSoapIn">
+    <wsdl:part name="parameters" element="tns:VoidTransaction" />
+  </wsdl:message>
+  <wsdl:message name="VoidTransactionSoapOut">
+    <wsdl:part name="parameters" element="tns:VoidTransactionResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckPrintJobStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckPrintJobStatus" />
+  </wsdl:message>
+  <wsdl:message name="CheckPrintJobStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckPrintJobStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrintedCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrintedCheck" />
+  </wsdl:message>
+  <wsdl:message name="GetPrintedCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrintedCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenChecksSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOpenChecks" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenChecksSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOpenChecksResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenChecksExSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOpenChecksEx" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenChecksExSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOpenChecksExResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenChecksByRVCSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOpenChecksByRVC" />
+  </wsdl:message>
+  <wsdl:message name="GetOpenChecksByRVCSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOpenChecksByRVCResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetChecksSoapIn">
+    <wsdl:part name="parameters" element="tns:GetChecks" />
+  </wsdl:message>
+  <wsdl:message name="GetChecksSoapOut">
+    <wsdl:part name="parameters" element="tns:GetChecksResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCheckDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCheckDetail" />
+  </wsdl:message>
+  <wsdl:message name="GetCheckDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCheckDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="CalculateTransactionTotalsExSoapIn">
+    <wsdl:part name="parameters" element="tns:CalculateTransactionTotalsEx" />
+  </wsdl:message>
+  <wsdl:message name="CalculateTransactionTotalsExSoapOut">
+    <wsdl:part name="parameters" element="tns:CalculateTransactionTotalsExResponse" />
+  </wsdl:message>
+  <wsdl:message name="PostTransactionEx2SoapIn">
+    <wsdl:part name="parameters" element="tns:PostTransactionEx2" />
+  </wsdl:message>
+  <wsdl:message name="PostTransactionEx2SoapOut">
+    <wsdl:part name="parameters" element="tns:PostTransactionEx2Response" />
+  </wsdl:message>
+  <wsdl:message name="AddToExistingCheckEx2SoapIn">
+    <wsdl:part name="parameters" element="tns:AddToExistingCheckEx2" />
+  </wsdl:message>
+  <wsdl:message name="AddToExistingCheckEx2SoapOut">
+    <wsdl:part name="parameters" element="tns:AddToExistingCheckEx2Response" />
+  </wsdl:message>
+  <wsdl:portType name="SimphonyPosAPIWebSoap">
+    <wsdl:operation name="CalculateTransactionTotals">
+      <wsdl:input message="tns:CalculateTransactionTotalsSoapIn" />
+      <wsdl:output message="tns:CalculateTransactionTotalsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurationInfo">
+      <wsdl:input message="tns:GetConfigurationInfoSoapIn" />
+      <wsdl:output message="tns:GetConfigurationInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurationInfoEx">
+      <wsdl:input message="tns:GetConfigurationInfoExSoapIn" />
+      <wsdl:output message="tns:GetConfigurationInfoExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PostTransactionEx">
+      <wsdl:input message="tns:PostTransactionExSoapIn" />
+      <wsdl:output message="tns:PostTransactionExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddToExistingCheckEx">
+      <wsdl:input message="tns:AddToExistingCheckExSoapIn" />
+      <wsdl:output message="tns:AddToExistingCheckExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VoidTransaction">
+      <wsdl:input message="tns:VoidTransactionSoapIn" />
+      <wsdl:output message="tns:VoidTransactionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPrintJobStatus">
+      <wsdl:input message="tns:CheckPrintJobStatusSoapIn" />
+      <wsdl:output message="tns:CheckPrintJobStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrintedCheck">
+      <wsdl:input message="tns:GetPrintedCheckSoapIn" />
+      <wsdl:output message="tns:GetPrintedCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenChecks">
+      <wsdl:input message="tns:GetOpenChecksSoapIn" />
+      <wsdl:output message="tns:GetOpenChecksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenChecksEx">
+      <wsdl:input message="tns:GetOpenChecksExSoapIn" />
+      <wsdl:output message="tns:GetOpenChecksExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenChecksByRVC">
+      <wsdl:input message="tns:GetOpenChecksByRVCSoapIn" />
+      <wsdl:output message="tns:GetOpenChecksByRVCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChecks">
+      <wsdl:input message="tns:GetChecksSoapIn" />
+      <wsdl:output message="tns:GetChecksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckDetail">
+      <wsdl:input message="tns:GetCheckDetailSoapIn" />
+      <wsdl:output message="tns:GetCheckDetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CalculateTransactionTotalsEx">
+      <wsdl:input message="tns:CalculateTransactionTotalsExSoapIn" />
+      <wsdl:output message="tns:CalculateTransactionTotalsExSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PostTransactionEx2">
+      <wsdl:input message="tns:PostTransactionEx2SoapIn" />
+      <wsdl:output message="tns:PostTransactionEx2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddToExistingCheckEx2">
+      <wsdl:input message="tns:AddToExistingCheckEx2SoapIn" />
+      <wsdl:output message="tns:AddToExistingCheckEx2SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SimphonyPosAPIWebHttpGet" />
+  <wsdl:portType name="SimphonyPosAPIWebHttpPost" />
+  <wsdl:binding name="SimphonyPosAPIWebSoap" type="tns:SimphonyPosAPIWebSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CalculateTransactionTotals">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/CalculateTransactionTotals" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurationInfo">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/GetConfigurationInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurationInfoEx">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/GetConfigurationInfoEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostTransactionEx">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/PostTransactionEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToExistingCheckEx">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/AddToExistingCheckEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoidTransaction">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/VoidTransaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPrintJobStatus">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/CheckPrintJobStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrintedCheck">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/GetPrintedCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenChecks">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/GetOpenChecks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenChecksEx">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/GetOpenChecksEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenChecksByRVC">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/GetOpenChecksByRVC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChecks">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/GetChecks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckDetail">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/GetCheckDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateTransactionTotalsEx">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/CalculateTransactionTotalsEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostTransactionEx2">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/PostTransactionEx2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToExistingCheckEx2">
+      <soap:operation soapAction="http://micros-hosting.com/EGateway/AddToExistingCheckEx2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SimphonyPosAPIWebSoap12" type="tns:SimphonyPosAPIWebSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CalculateTransactionTotals">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/CalculateTransactionTotals" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurationInfo">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/GetConfigurationInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigurationInfoEx">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/GetConfigurationInfoEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostTransactionEx">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/PostTransactionEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToExistingCheckEx">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/AddToExistingCheckEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoidTransaction">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/VoidTransaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPrintJobStatus">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/CheckPrintJobStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrintedCheck">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/GetPrintedCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenChecks">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/GetOpenChecks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenChecksEx">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/GetOpenChecksEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOpenChecksByRVC">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/GetOpenChecksByRVC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChecks">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/GetChecks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCheckDetail">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/GetCheckDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateTransactionTotalsEx">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/CalculateTransactionTotalsEx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostTransactionEx2">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/PostTransactionEx2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToExistingCheckEx2">
+      <soap12:operation soapAction="http://micros-hosting.com/EGateway/AddToExistingCheckEx2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SimphonyPosAPIWebHttpGet" type="tns:SimphonyPosAPIWebHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="SimphonyPosAPIWebHttpPost" type="tns:SimphonyPosAPIWebHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="SimphonyPosAPIWeb">
+    <wsdl:port name="SimphonyPosAPIWebSoap" binding="tns:SimphonyPosAPIWebSoap">
+      <soap:address location="https://partner-sim.simphony.tk/EGateway/SimphonyPosApiWeb.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SimphonyPosAPIWebSoap12" binding="tns:SimphonyPosAPIWebSoap12">
+      <soap12:address location="https://partner-sim.simphony.tk/EGateway/SimphonyPosApiWeb.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SimphonyPosAPIWebHttpGet" binding="tns:SimphonyPosAPIWebHttpGet">
+      <http:address location="https://partner-sim.simphony.tk/EGateway/SimphonyPosApiWeb.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SimphonyPosAPIWebHttpPost" binding="tns:SimphonyPosAPIWebHttpPost">
+      <http:address location="https://partner-sim.simphony.tk/EGateway/SimphonyPosApiWeb.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
